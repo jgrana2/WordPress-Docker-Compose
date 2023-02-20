@@ -25,17 +25,19 @@ services:
       WORDPRESS_DB_USER: "${WORDPRESS_DB_USER}"
       WORDPRESS_DB_PASSWORD: "${WORDPRESS_DB_PASSWORD}"
     ports:
-      - 8123:80  
+      - 9000:9000  
   nginx:
     image: nginx:alpine
     container_name: wp-nginx
     depends_on: 
       - wordpress-fpm
     ports:
-      - 8085:80
+      - 80:80
     volumes:
       - ./conf.d:/etc/nginx/conf.d
       - ./wp_files:/var/www/html
+    restart: always
 
 volumes: 
-  wp_files: 
+  wp_files:
+  conf.d:
